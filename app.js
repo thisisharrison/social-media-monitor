@@ -1,6 +1,21 @@
 const express = require("express");
+// const bodyParser = require("body-parser");
+// const { graphqlExpress } = require("apollo-server-express");
+
+const mockData = require("./mockData");
+
 const app = express();
 
-const port = process.env.PORT || 5000;
+const port = 5000;
+
+// const socialMediaSchema = {};
+
+// app.use(
+//   "/graphql",
+//   bodyParser.json(),
+//   graphqlExpress({ schema: socialMediaSchema })
+// );
+
+app.get("/api/posts", (req, res) => res.json(mockData));
 
 app.listen(port, () => console.log(`Server is running on ${port}`));
