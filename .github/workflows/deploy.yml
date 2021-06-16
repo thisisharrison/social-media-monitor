@@ -10,6 +10,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: Install back end...
+        run: npm install
+      - name: Install front end...
+        run: npm run client-install
+      - name: Test front end...
+        run: npm run client-test
+      - name: Build front end...
+        run: npm run client-build
 
       - name: AWS SSM Send Command
         uses: peterkimzz/aws-ssm-send-command@master
