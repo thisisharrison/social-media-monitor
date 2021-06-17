@@ -1,6 +1,6 @@
 function fetchPosts(query) {
   return window
-    .fetch(`http://localhost:5000/api/posts/?${query}`, {
+    .fetch(`/api/posts/?${query}`, {
       method: "GET",
     })
     .then(async (response) => {
@@ -18,7 +18,7 @@ function fetchPosts(query) {
 
 function fetchWorkspace() {
   return window
-    .fetch("http://localhost:5000/api/workspace", {
+    .fetch("/api/workspace", {
       method: "GET",
     })
     .then(async (response) => {

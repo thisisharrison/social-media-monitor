@@ -57,7 +57,7 @@ function QueryProvider(props: React.PropsWithChildren<{}>) {
 function useQueryContext() {
   const context = React.useContext(QueryContext);
   if (!context) {
-    throw new Error(`useQueryContext must be used inside QueryContextProvider`);
+    throw new Error(`useQueryContext must be used inside QueryProvider`);
   }
   return context;
 }
