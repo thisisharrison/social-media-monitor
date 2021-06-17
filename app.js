@@ -4,6 +4,7 @@ const url = require("url");
 const querystring = require("querystring");
 const bodyParser = require("body-parser");
 const moment = require("moment");
+const path = require("path");
 
 const { mockData, CLIENTS, MEDIA_PLATFORMS } = require("./mockData");
 
@@ -12,7 +13,12 @@ const app = express();
 const port = process.env.PORT || 5000;
 // aws-eb: process.env.HTTP_PORT
 
-app.use(express.static(path.join(__dirname, "client", "build")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  app.get("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 app.use(cors());
 

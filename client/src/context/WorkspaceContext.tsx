@@ -32,7 +32,6 @@ function useWorkspace() {
   }
   const { setWorkspace } = context;
   React.useEffect(() => {
-    console.log("API!!!!!");
     fetchWorkspace().then((data: WorkspaceType) => setWorkspace(data));
   }, [setWorkspace]);
   return context;

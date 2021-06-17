@@ -39,8 +39,6 @@ function Dashboard() {
   const { query } = useQueryContext();
 
   React.useEffect(() => {
-    console.log("%c Running API call", "background: #222; color: #bada55");
-
     let queryString = Object.keys(query)
       .map((key) => {
         if (!query[key]) return "";
