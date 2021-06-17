@@ -9,7 +9,10 @@ const { mockData, CLIENTS, MEDIA_PLATFORMS } = require("./mockData");
 
 const app = express();
 
-const port = 5000;
+const port = process.env.PORT || 5000;
+// aws-eb: process.env.HTTP_PORT
+
+app.use(express.static(path.join(__dirname, "client", "build")));
 
 app.use(cors());
 
