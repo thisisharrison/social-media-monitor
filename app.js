@@ -9,7 +9,9 @@ const { mockData, CLIENTS, MEDIA_PLATFORMS } = require("./mockData");
 
 const app = express();
 
-const port = 5000;
+const port = process.env.HTTP_PORT || 5000;
+
+app.use(express.static(path.join(__dirname, "client", "build")));
 
 app.use(cors());
 
