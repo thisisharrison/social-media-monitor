@@ -5,7 +5,7 @@ const querystring = require("querystring");
 const bodyParser = require("body-parser");
 const moment = require("moment");
 
-const mockData = require("./mockData");
+const { mockData, CLIENTS, MEDIA_PLATFORMS } = require("./mockData");
 
 const app = express();
 
@@ -38,6 +38,10 @@ app.get("/api/posts/", (req, res) => {
   }
 
   res.json(response);
+});
+
+app.get("/api/workspace", (req, res) => {
+  res.json({ clients: CLIENTS, medium: MEDIA_PLATFORMS });
 });
 
 app.listen(port, () => console.log(`Server is running on ${port}`));

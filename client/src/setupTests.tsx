@@ -7,12 +7,15 @@ import "@testing-library/jest-dom";
 import { render as rtlrender, RenderOptions } from "@testing-library/react";
 import { PostCacheProvider } from "./context/PostCacheContext";
 import { QueryProvider } from "./context/QueryContext";
+import { WorkspaceProvider } from "./context/WorkspaceContext";
 
 const AllTheProviders: React.FC = ({ children }) => {
   return (
-    <PostCacheProvider>
-      <QueryProvider>{children}</QueryProvider>
-    </PostCacheProvider>
+    <WorkspaceProvider>
+      <PostCacheProvider>
+        <QueryProvider>{children}</QueryProvider>
+      </PostCacheProvider>
+    </WorkspaceProvider>
   );
 };
 

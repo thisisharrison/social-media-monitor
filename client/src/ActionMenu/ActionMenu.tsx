@@ -2,6 +2,7 @@ import React from "react";
 import moment from "moment";
 import { usePostCache } from "../context/PostCacheContext";
 import { useQueryContext } from "../context/QueryContext";
+import { useWorkspace } from "../context/WorkspaceContext";
 import { Profile } from "../Profile/Profile";
 import Dropdown from "react-bootstrap/Dropdown";
 import { DropdownItemProps } from "react-bootstrap/DropdownItem";
@@ -15,7 +16,8 @@ import {
 export const ActionMenu = () => {
   const { query, dispatch } = useQueryContext();
   const { posts } = usePostCache();
-  const [ dateFilter, setDateFilter ] = React.useState<string | null>(null);
+  const { workspace } = useWorkspace();
+  const [dateFilter, setDateFilter] = React.useState<string | null>(null);
 
   const handleSorting = (event: React.MouseEvent<DropdownItemProps>) => {
     const button = event.currentTarget as HTMLButtonElement;
@@ -31,7 +33,7 @@ export const ActionMenu = () => {
     const button = event.currentTarget as HTMLButtonElement;
     const field = button.getAttribute("data-filter") || "";
     if (field === dateFilter) {
-      setDateFilter(null)
+      setDateFilter(null);
       dispatch({ type: "FILTER BY DATE", dateMin: null });
     } else {
       setDateFilter(field);
@@ -65,8 +67,6 @@ export const ActionMenu = () => {
 
   return (
     <div>
-      <pre>{JSON.stringify(query)}</pre>
-      <pre>{JSON.stringify(posts)}</pre>
       <Profile />
       <SortFilter>
         <div className="top-row">
@@ -91,17 +91,7 @@ export const ActionMenu = () => {
               query.medium ? `All ${query.medium} posts` : `All medium selected`
             }
           >
-            {[
-              "Facebook",
-              "Instagram",
-              "HK01",
-              "Twitter",
-              "Weibo",
-              "BuzzFeed",
-              "WeChat",
-              "Line",
-              "LinkedIn",
-            ].map((mediumType) => {
+            {workspace.medium.map((mediumType) => {
               return (
                 <Dropdown.Item
                   key={mediumType}

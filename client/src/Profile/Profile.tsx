@@ -1,11 +1,13 @@
 import React from "react";
 import moment from "moment";
 import { useQueryContext } from "../context/QueryContext";
+import { useWorkspace } from "../context/WorkspaceContext";
 import { ProfileSection, DropdownButton, DropdownItem } from "./styles";
 
 export const Profile = () => {
   const { query, dispatch } = useQueryContext();
   const [keyword, setKeyword] = React.useState<string>("");
+  const { workspace } = useWorkspace();
 
   const handleKeyword = (event: React.FormEvent<HTMLInputElement>): void => {
     setKeyword(event.currentTarget.value);
@@ -18,7 +20,7 @@ export const Profile = () => {
 
   const handleSelect = (event: string) => {
     if (event === query.client) {
-      dispatch({ type: "FILTER BY CLIENT", client: null });  
+      dispatch({ type: "FILTER BY CLIENT", client: null });
     } else {
       dispatch({ type: "FILTER BY CLIENT", client: event });
     }
@@ -56,8 +58,12 @@ export const Profile = () => {
           title={query.client ? query.client : "Clients"}
           onSelect={handleSelect}
         >
-          {["Sony", "Panasonic", "Samsung", "Apple"].map((client) => {
-            return <DropdownItem key={client} eventKey={client}>{client}</DropdownItem>;
+          {workspace.clients.map((client) => {
+            return (
+              <DropdownItem key={client.id} eventKey={client.name}>
+                {client.name}
+              </DropdownItem>
+            );
           })}
         </DropdownButton>
       </div>

@@ -1,11 +1,12 @@
 import React from "react";
-import fetchPosts from "../api";
+import { fetchPosts } from "../api";
 import {
   PostCacheProvider,
   usePostCache,
   PostType,
 } from "../context/PostCacheContext";
 import { QueryProvider, useQueryContext } from "../context/QueryContext";
+import { WorkspaceProvider, useWorkspace } from "../context/WorkspaceContext";
 import { Header } from "../Header/Header";
 import { Sidebar } from "../Sidebar/Sidebar";
 import { ActionMenu } from "../ActionMenu/ActionMenu";
@@ -15,19 +16,21 @@ import Main from "./styles";
 
 function App() {
   return (
-    <PostCacheProvider>
-      <QueryProvider>
-        <Main>
-          <div>
-            <Sidebar />
-          </div>
-          <div>
-            <Header />
-            <Dashboard />
-          </div>
-        </Main>
-      </QueryProvider>
-    </PostCacheProvider>
+    <WorkspaceProvider>
+      <PostCacheProvider>
+        <QueryProvider>
+          <Main>
+            <div>
+              <Sidebar />
+            </div>
+            <div>
+              <Header />
+              <Dashboard />
+            </div>
+          </Main>
+        </QueryProvider>
+      </PostCacheProvider>
+    </WorkspaceProvider>
   );
 }
 
