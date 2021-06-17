@@ -1,4 +1,5 @@
 import React from "react";
+import { PostType } from "../context/PostCacheContext";
 import moment from "moment";
 import { Card, Bars } from "./styles";
 import { IconDefinition } from "@fortawesome/fontawesome-common-types";
@@ -14,6 +15,9 @@ import {
   faComment,
 } from "@fortawesome/free-solid-svg-icons";
 
+interface PostIndexItemProp {
+  post: PostType;
+}
 interface IIconMap {
   [key: string]: IconDefinition;
 }
@@ -28,7 +32,7 @@ const iconMap: IIconMap = {
   comments: faComment,
 };
 
-export const PostIndexItem = ({ post }: any) => {
+export const PostIndexItem = ({ post }: PostIndexItemProp) => {
   const [truncated, setTruncate] = React.useState(true);
 
   function handleTruncate(event: React.UIEvent<HTMLAnchorElement>) {

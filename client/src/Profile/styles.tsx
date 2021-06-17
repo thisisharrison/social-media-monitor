@@ -35,8 +35,10 @@ export const ProfileSection = styled.section`
   input {
     border: 0;
     background-color: #717a93;
+    padding-left: 1rem;
     margin-right: 1rem;
     height: 2rem;
+    color: #f1f1f4;
     &::placeholder {
       color: #a9b1c0;
       opacity: 1;

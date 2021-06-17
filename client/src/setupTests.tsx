@@ -6,12 +6,12 @@ import React from "react";
 import "@testing-library/jest-dom";
 import { render as rtlrender, RenderOptions } from "@testing-library/react";
 import { PostCacheProvider } from "./context/PostCacheContext";
-import { ActionProvider } from "./context/ActionContext";
+import { QueryProvider } from "./context/QueryContext";
 
 const AllTheProviders: React.FC = ({ children }) => {
   return (
     <PostCacheProvider>
-      <ActionProvider>{children}</ActionProvider>
+      <QueryProvider>{children}</QueryProvider>
     </PostCacheProvider>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 
-interface PostType {
+export interface PostType {
   id: string;
   author: string;
   img: string;
@@ -10,19 +10,21 @@ interface PostType {
   post: string;
   sentiment: string;
   impact: number;
-  data: {
-    likes: number;
-    comments: number;
-    laughs: number;
-    cries: number;
-    surprises: number;
-    angry: number;
-  };
+  data: DataType & { [key: string]: number };
 }
 
-interface PostContextInterface {
+interface DataType {
+  likes: number;
+  comments: number;
+  laughs: number;
+  cries: number;
+  surprises: number;
+  angry: number;
+}
+
+export interface PostContextInterface {
   posts: Array<PostType>;
-  setPosts: (data: []) => undefined;
+  setPosts: (data: Array<PostType>) => undefined;
 }
 
 const PostCacheContext = React.createContext<PostContextInterface | null>(null);

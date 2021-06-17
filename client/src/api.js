@@ -1,6 +1,6 @@
-function fetchPosts() {
+function fetchPosts(query = "client=happy") {
   return window
-    .fetch("http://localhost:5000/api/posts", {
+    .fetch(`http://localhost:5000/api/posts/?${query}`, {
       method: "GET",
     })
     .then(async (response) => {
