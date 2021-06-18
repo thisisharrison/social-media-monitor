@@ -1,6 +1,6 @@
 import React from "react";
 
-const defaultQueryState = {
+const defaultQueryState: State = {
   sortBy: null,
   medium: null,
   dateMin: null,
@@ -8,7 +8,7 @@ const defaultQueryState = {
   client: null,
 };
 
-interface State {
+export interface State {
   [key: string]: any;
   sortBy?: string | null;
   medium?: string | null;
