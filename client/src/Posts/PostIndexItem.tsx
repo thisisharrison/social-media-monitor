@@ -86,6 +86,8 @@ export const PostIndexItem = ({ post }: PostIndexItemProp) => {
                   <FontAwesomeIcon icon={iconMap[type]} /> {post.data[type]}
                 </li>
               );
+            } else {
+              return null;
             }
           })}
         </ul>
