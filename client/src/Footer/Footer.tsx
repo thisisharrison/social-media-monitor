@@ -1,6 +1,5 @@
 import React from "react";
 import Pagination from "react-bootstrap/Pagination";
-import PageItem from "react-bootstrap/PageItem";
 import styled from "styled-components";
 
 const StickyFooter = styled.div``;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const intialQueryState = {
+const defaultQueryState = {
   sortBy: null,
   medium: null,
   dateMin: null,
@@ -10,11 +10,11 @@ const intialQueryState = {
 
 interface State {
   [key: string]: any;
-  sortBy: string | null;
-  medium: string | null;
-  dateMin: number | null;
-  keyword: string | null;
-  client: string | null;
+  sortBy?: string | null;
+  medium?: string | null;
+  dateMin?: number | null;
+  keyword?: string | null;
+  client?: string | null;
 }
 
 type ACTIONTYPE =
@@ -27,7 +27,6 @@ type ACTIONTYPE =
 function queryReducer(state: State, action: ACTIONTYPE): State {
   switch (action.type) {
     case "SORT BY":
-      console.log("here");
       return { ...state, sortBy: action.sortBy };
     case "FILTER BY MEDIUM":
       return { ...state, medium: action.medium };
@@ -49,8 +48,8 @@ interface QueryContextInterface {
 
 const QueryContext = React.createContext<QueryContextInterface | null>(null);
 
-function QueryProvider(props: React.PropsWithChildren<{}>) {
-  const [query, dispatch] = React.useReducer(queryReducer, intialQueryState);
+function QueryProvider({ initialQuery = defaultQueryState, ...props }) {
+  const [query, dispatch] = React.useReducer(queryReducer, initialQuery);
   return <QueryContext.Provider value={{ query, dispatch }} {...props} />;
 }
 
@@ -62,4 +61,4 @@ function useQueryContext() {
   return context;
 }
 
-export { QueryContext, QueryProvider, useQueryContext, intialQueryState };
+export { QueryContext, QueryProvider, useQueryContext, defaultQueryState };

@@ -1,11 +1,7 @@
 import React from "react";
 import { PostIndexItem } from "./PostIndexItem";
-import { usePostCache, PostType } from "../context/PostCacheContext";
+import { usePostCache } from "../context/PostCacheContext";
 import { PostSection } from "./styles";
-
-interface PostIndexProps {
-  posts: Array<PostType>;
-}
 
 export const PostIndex = () => {
   const { posts } = usePostCache();

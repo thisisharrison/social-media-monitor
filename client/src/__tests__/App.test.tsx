@@ -1,12 +1,15 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
+import { render } from "../setupTests";
 import userEvent from "@testing-library/user-event";
 
 import App from "../App/App";
 
 describe("<App />", () => {
-  test("is rendering properly", () => {
+  test("is rendering initial state", () => {
     render(<App />);
-    expect(2 + 2).toBe(4);
+    expect(
+      screen.getByRole("heading", { name: /all clients/i })
+    ).toBeInTheDocument();
   });
 });

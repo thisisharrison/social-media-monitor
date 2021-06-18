@@ -56,6 +56,6 @@ function generateRandomPosts(target) {
   return fakePosts;
 }
 
-const mockData = generateRandomPosts(50);
+const mockData = generateRandomPosts(100);
 
-module.exports = {mockData, CLIENTS, MEDIA_PLATFORMS}
+module.exports = { mockData, CLIENTS, MEDIA_PLATFORMS };

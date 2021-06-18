@@ -6,7 +6,9 @@ import { ProfileSection, DropdownButton, DropdownItem } from "./styles";
 
 export const Profile = () => {
   const { query, dispatch } = useQueryContext();
-  const [keyword, setKeyword] = React.useState<string>("");
+  const [keyword, setKeyword] = React.useState<string>(() =>
+    query.keyword ? query.keyword : ""
+  );
   const { workspace } = useWorkspace();
 
   const handleKeyword = (event: React.FormEvent<HTMLInputElement>): void => {
@@ -60,7 +62,11 @@ export const Profile = () => {
         >
           {workspace.clients.map((client) => {
             return (
-              <DropdownItem key={client.id} eventKey={client.name}>
+              <DropdownItem
+                key={client.id}
+                eventKey={client.name}
+                active={client.name === query.client}
+              >
                 {client.name}
               </DropdownItem>
             );

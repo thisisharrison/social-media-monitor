@@ -24,13 +24,13 @@ interface DataType {
 
 export interface PostContextInterface {
   posts: Array<PostType>;
-  setPosts: (data: Array<PostType>) => undefined;
+  setPosts: React.Dispatch<React.SetStateAction<Array<PostType>>>;
 }
 
 const PostCacheContext = React.createContext<PostContextInterface | null>(null);
 
-function PostCacheProvider(props: any) {
-  const [posts, setPosts] = React.useState([]);
+function PostCacheProvider({ ...props }) {
+  const [posts, setPosts] = React.useState<Array<PostType> | []>([]);
   return <PostCacheContext.Provider value={{ posts, setPosts }} {...props} />;
 }
 
