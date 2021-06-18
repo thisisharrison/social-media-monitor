@@ -15,9 +15,21 @@ import {
 
 export const ActionMenu = () => {
   const { query, dispatch } = useQueryContext();
-  const { posts } = usePostCache();
   const { workspace } = useWorkspace();
   const [dateFilter, setDateFilter] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    let queryDate = query.dateMin;
+    if (queryDate) {
+      let days = (moment().unix() - queryDate) / 60 / 60 / 24;
+      if (days < 2) setDateFilter("24hrs");
+      else if (days < 8) setDateFilter("7days");
+      else if (days < 31) setDateFilter("30days");
+      else {
+        setDateFilter(null);
+      }
+    }
+  }, [query, setDateFilter]);
 
   const handleSorting = (event: React.MouseEvent<DropdownItemProps>) => {
     const button = event.currentTarget as HTMLButtonElement;
@@ -98,6 +110,7 @@ export const ActionMenu = () => {
                   as="button"
                   data-filter={mediumType}
                   onClick={handleMediumFilter}
+                  active={query.medium === mediumType ? true : false}
                 >
                   {mediumType}
                 </Dropdown.Item>

@@ -1,5 +1,6 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
+import { render } from "../setupTests";
 import userEvent from "@testing-library/user-event";
 
 import { PostIndex } from "../Posts/PostIndex";
@@ -8,11 +9,10 @@ import { PostIndexItem } from "../Posts/PostIndexItem";
 describe("<PostIndex /> and <PostIndexItem />", () => {
   test("<PostIndex />", () => {
     render(<PostIndex />);
-    expect(2 + 2).toBe(4);
+    expect(screen.getByText(/total records:/i)).toHaveTextContent("0");
+    expect(screen.getByText(/sentiment/i)).toBeInTheDocument();
+    expect(screen.getByText(/impact/i)).toBeInTheDocument();
   });
 
-  test("<PostIndexItem />", () => {
-    render(<PostIndexItem />);
-    expect(2 + 2).toBe(4);
-  });
+  test("<PostIndexItem />", () => {});
 });

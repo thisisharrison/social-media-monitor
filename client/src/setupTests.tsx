@@ -8,21 +8,22 @@ import { render as rtlrender, RenderOptions } from "@testing-library/react";
 import { PostCacheProvider } from "./context/PostCacheContext";
 import { QueryProvider } from "./context/QueryContext";
 import { WorkspaceProvider } from "./context/WorkspaceContext";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const AllTheProviders: React.FC = ({ children }) => {
   return (
-    <WorkspaceProvider>
-      <PostCacheProvider>
-        <QueryProvider>{children}</QueryProvider>
-      </PostCacheProvider>
-    </WorkspaceProvider>
+    <Router>
+      <WorkspaceProvider>
+        <PostCacheProvider>
+          <QueryProvider>{children}</QueryProvider>
+        </PostCacheProvider>
+      </WorkspaceProvider>
+    </Router>
   );
 };
 
-const render = (
-  ui: React.ReactElement,
-  options?: Omit<RenderOptions, "queries">
-) => rtlrender(ui, { wrapper: AllTheProviders, ...options });
+const render = (ui: React.ReactElement, options?: {}) =>
+  rtlrender(ui, { wrapper: AllTheProviders, ...options });
 
 export * from "@testing-library/react";
 export { render };
