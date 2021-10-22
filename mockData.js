@@ -30,6 +30,12 @@ function randomElement(array) {
 function generateRandomPosts(target) {
   let counter = 0;
   const fakePosts = [];
+  const today = new Date();
+  const todayMonth = today.getMonth() + 1;
+  const todayDate = today.getDate();
+  const todayYear = today.getFullYear();
+  const todayStr = `${todayYear}-${todayMonth}-${todayDate}`
+  const lastMonthStr = `${todayYear}-${todayMonth - 1}-${todayDate}`
   while (counter < target) {
     const post = {
       id: nanoid(),
@@ -37,7 +43,7 @@ function generateRandomPosts(target) {
       img: "http://lorempixel.com/640/480/cats",
       client: randomElement(CLIENTS).name,
       media: randomElement(MEDIA_PLATFORMS),
-      date: `${faker.date.between("2021-05-01", "2021-06-30")}`,
+      date: `${faker.date.between(lastMonthStr, todayStr)}`,
       post: faker.lorem.paragraphs(),
       sentiment: randomElement(SENTIMENTS),
       impact: Math.floor(Math.random() * 5),
